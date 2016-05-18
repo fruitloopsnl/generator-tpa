@@ -25,7 +25,7 @@ module.exports = yeoman.Base.extend({
       defaults: false
     });
 
-    this.sourceRoot(path.join(path.dirname(this.resolved), 'templates/tpa-seed-element'));
+    this.sourceRoot(path.join(path.dirname(this.resolved), 'templates/tpa-seed'));
   },
   validate: function () {
     this.elementName = this['element-name'];
