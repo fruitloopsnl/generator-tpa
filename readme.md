@@ -1,9 +1,9 @@
 [![npm version](https://img.shields.io/npm/v/generator-polymer.svg)](http://npmjs.org/generator-polymer)
 [![npm downloads](https://img.shields.io/npm/dm/generator-polymer.svg)](http://npmjs.org/generator-polymer)
-[![Build Status](https://img.shields.io/travis/yeoman/generator-polymer/master.svg)](https://travis-ci.org/yeoman/generator-polymer)
+[![Build Status](https://img.shields.io/travis/TPA-Group/generator-polymer/master.svg)](https://travis-ci.org/yeoman/generator-polymer)
 [![Dependency Status](https://img.shields.io/david/yeoman/generator-polymer.svg)](https://david-dm.org/yeoman/generator-polymer)
 
-## Yeoman generator for Polymer projects
+## Yeoman generator for TPA projects
 
 <img src="http://i.imgur.com/dsFChIk.png">
 
@@ -28,7 +28,7 @@ This generator clones [Polymer Starter Kit](https://github.com/PolymerElements/p
 ## Installation
 
 Install the generator
-`npm install -g generator-polymer`
+`npm install -g generator-tpa`
 
 Make a new directory and cd into it
 `mkdir -p my-project && cd $_`
@@ -44,6 +44,7 @@ Available generators:
 - [polymer:element](#element-alias-el)
 - [polymer:seed](#seed)
 - [polymer:gh](#gh)
+- [polymer:tpa](#tpa)
 
 **Note: Generators are to be run from the root of your app**
 
@@ -91,6 +92,18 @@ Example:
 ```bash
 mkdir -p my-foo && cd $_
 yo polymer:seed my-foo
+polyserve
+```
+
+### TPA
+Generates a reusable polymer element based on the [tpa-seed-element workflow](https://github.com/ING-Group/tpa-seed).
+
+To preview your new element you'll want to use the [polyserve](https://github.com/PolymerLabs/polyserve) tool.
+
+Example:
+```bash
+mkdir -p my-foo && cd $_
+yo polymer:tpa tpa-account-balance
 polyserve
 ```
 

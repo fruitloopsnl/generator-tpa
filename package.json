@@ -1,7 +1,7 @@
 {
-  "name": "generator-polymer",
+  "name": "generator-tpa",
   "version": "1.3.0",
-  "description": "Scaffold out a Polymer project",
+  "description": "Scaffold out a TPA project",
   "keywords": [
     "yeoman-generator",
     "scaffold",
@@ -11,7 +11,7 @@
   ],
   "author": "Chrome Developer Relations",
   "main": "app/index.js",
-  "repository": "yeoman/generator-polymer",
+  "repository": "ING-Group/generator-tpa",
   "scripts": {
     "test": "jshint {app,el,gh,seed,test}/*.js script-base.js util.js && mocha --reporter spec",
     "prepublish": "git submodule update --init --recursive"
