@@ -45,21 +45,17 @@ module.exports = yeoman.Base.extend({
     var done = this.async();
 
     // Have Yeoman greet the user.
-    this.log(yosay('Out of the box I include Polymer\'s tpa-seed-element.'));
+    this.log(yosay('Out of the box I include Polymer\'s tpa-component.'));
 
     var prompts = [{
         name: 'ghUser',
         message: 'What is your GitHub username?'
-      }, {
-        name: 'includeWCT',
-        message: 'Would you like to include web-component-tester?',
-        type: 'confirm'
       }
     ];
 
     this.prompt(prompts, function (props) {
       this.ghUser = props.ghUser;
-      this.includeWCT = props.includeWCT;
+      this.includeWCT = true;
 
       // Save user's GitHub name for when they want to use gh subgenerator
       this.config.set({
@@ -73,11 +69,11 @@ module.exports = yeoman.Base.extend({
   },
   component: function () {
 
-    // Process function to replace 'tpa-seed-element' in template files
+    // Process function to replace 'tpa-component' in template files
     // with actual element name
     var renameElement = function (file) {
       file = file.toString();
-      return file.replace(/tpa-seed-element/g, this.elementName);
+      return file.replace(/tpa-component/g, this.elementName);
     }.bind(this);
 
     this.fs.copy([
@@ -88,14 +84,14 @@ module.exports = yeoman.Base.extend({
         process: renameElement,
         globOptions: {
           ignore: [
-            '**/{bower.json,tpa-seed-element.html,.npmignore}',
+            '**/{bower.json,tpa-component.html,.npmignore}',
             '**/{test,.git}/**'
           ]
         }
       });
 
     this.fs.copy(
-      this.templatePath('tpa-seed-element.html'),
+      this.templatePath('tpa-component.html'),
       this.destinationPath(this.elementName + '.html'),
       { process: renameElement });
 
@@ -109,7 +105,7 @@ module.exports = yeoman.Base.extend({
         manifest.main = this.elementName + '.html';
         manifest.license.replace(/polymer/g, this.ghUser);
         manifest.homepage.replace(/<USERNAME>/g, this.ghUser);
-        manifest.homepage.replace(/tpa-seed-element/g, this.elementName);
+        manifest.homepage.replace(/tpa-component/g, this.elementName);
         if (!this.includeWCT) {
           delete manifest.devDependencies['web-component-tester'];
         }
