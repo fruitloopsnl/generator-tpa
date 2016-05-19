@@ -13,7 +13,7 @@
   "main": "app/index.js",
   "repository": "ING-Group/generator-tpa",
   "scripts": {
-    "test": "jshint {app,el,gh,seed,test}/*.js script-base.js util.js && mocha --reporter spec",
+    "test": "jshint {app,el,gh,seed,test,component}/*.js script-base.js util.js && mocha --reporter spec",
     "prepublish": "git submodule update --init --recursive"
   },
   "dependencies": {
@@ -45,6 +45,7 @@
     "element",
     "gh",
     "seed",
+    "component",
     "script-base.js",
     "util.js"
   ]
