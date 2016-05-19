@@ -39,12 +39,7 @@
     "node": ">=0.10.0"
   },
   "licenses": "BSD",
-  "files": [
-    "app",
-    "el",
-    "element",
-    "gh",
-    "seed",
+  "files": [ 
     "component",
     "script-base.js",
     "util.js"
