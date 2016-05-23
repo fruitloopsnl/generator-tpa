@@ -6,4 +6,4 @@
 	url = https://github.com/PolymerElements/seed-element.git
 [submodule "component/templates/tpa-component"]
 	path = component/templates/tpa-component
-	url = https://github.com/ING-Group/tpa-seed.git
+	url = https://github.com/ING-Group/tpa-component.git
