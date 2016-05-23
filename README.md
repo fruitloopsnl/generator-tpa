@@ -25,14 +25,8 @@ This generator clones [tpa-component](https://github.com/ING-Group/tpa-component
 
 ## Installation
 
-Install the generator
+### Install the generator
 `npm install -g generator-tpa`
-
-Make a new directory and cd into it
-`mkdir -p my-project && cd $_`
-
-Scaffold a new TPA component:
-`yo tpa:component`
 
 ## Generators
 
@@ -76,6 +70,18 @@ See the [web-component-tester readme](https://github.com/Polymer/web-component-t
 See the [contributing docs](https://github.com/yeoman/yeoman/blob/master/contributing.md)
 
 When submitting an issue, please follow the [guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-submission). Especially important is to make sure Yeoman is up-to-date, and providing the command or commands that cause the issue.
+
+### Install the generator from a local folder
+First clone this project to a local folder, and from that folder execute the following command:
+
+`npm install -g ./`
+
+### Updating submodules
+
+This generator uses git submodules to generate the component.
+To update the submodules use the following command:
+
+`git submodule update --remote`
 
 ## License
 
