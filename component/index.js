@@ -84,7 +84,7 @@ module.exports = yeoman.Base.extend({
         process: renameElement,
         globOptions: {
           ignore: [
-            '**/{bower.json,tpa-component.html,.npmignore}',
+            '**/{bower.json,tpa-component.html,tpa-component-i18n.html,.npmignore}',
             '**/{test,.git}/**'
           ]
         }
@@ -94,6 +94,11 @@ module.exports = yeoman.Base.extend({
       this.templatePath('tpa-component.html'),
       this.destinationPath(this.elementName + '.html'),
       { process: renameElement });
+      
+    this.fs.copy(
+      this.templatePath('tpa-component-i18n.html'),
+      this.destinationPath(this.elementName + '-i18n.html'),
+      { process: renameElement });      
 
     // Remove WCT if the user opted out
     this.fs.copy(
