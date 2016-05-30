@@ -48,18 +48,31 @@ module.exports = yeoman.Base.extend({
     this.log(yosay('Out of the box I include Polymer\'s tpa-seed.'));
 
     var prompts = [{
-        name: 'ghUser',
-        message: 'What is your GitHub username?'
+      name: 'ghUser',
+      message: 'What is your GitHub username?'
+    },
+      {
+        name: 'description',
+        message: 'Provide the description for your component:'
+      },
+      {
+        name: 'version',
+        message: 'What is the version of your component?',
+        default: '0.0.1'
       }
     ];
 
     this.prompt(prompts, function (props) {
       this.ghUser = props.ghUser;
+      this.description = props.description;
+      this.version = props.version;
       this.includeWCT = true;
 
       // Save user's GitHub name for when they want to use gh subgenerator
       this.config.set({
-        ghUser: this.ghUser
+        ghUser: this.ghUser,
+        description: this.description,
+        version: this.version
       });
       this.config.save();
 
@@ -93,14 +106,29 @@ module.exports = yeoman.Base.extend({
     this.fs.copy(
       this.templatePath('tpa-seed.html'),
       this.destinationPath(this.elementName + '.html'),
-      { process: renameElement });
-      
+      { process: function (file) {
+        file = file.toString();
+        file = file.replace(/tpa-seed/g, this.elementName);
+        file = file.replace(/An element providing a solution to no problem in particular/g, this.description);
+        return file;
+      }.bind(this) });
+
+    this.fs.copy(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      { process: function (file) {
+        var packageFile = file.toString();
+        packageFile = packageFile.replace(/tpa-seed/g, this.elementName);
+        packageFile = packageFile.replace(/An element providing a starting point for your own reusable TPA elements\./g, this.description);
+        packageFile = packageFile.replace(/[\"\']version[\"\']\: [\"\']0\.0\.0[\"\']/g, '"version": "' + this.version + '"');
+        return packageFile;
+      }.bind(this) });
+
     this.fs.copy(
       this.templatePath('tpa-seed-i18n.html'),
       this.destinationPath(this.elementName + '-i18n.html'),
-      { process: renameElement });      
+      { process: renameElement });
 
-    // Remove WCT if the user opted out
     this.fs.copy(
       this.templatePath('bower.json'),
       this.destinationPath('bower.json'),
@@ -108,6 +136,8 @@ module.exports = yeoman.Base.extend({
         var manifest =  JSON.parse(file.toString());
         manifest.name = this.elementName;
         manifest.main = this.elementName + '.html';
+        manifest.version = this.version;
+        manifest.description = this.description;
         manifest.license.replace(/polymer/g, this.ghUser);
         manifest.homepage.replace(/<USERNAME>/g, this.ghUser);
         manifest.homepage.replace(/tpa-seed/g, this.elementName);
@@ -117,6 +147,7 @@ module.exports = yeoman.Base.extend({
         return JSON.stringify(manifest, null, 2);
       }.bind(this) });
 
+    // Remove WCT if the user opted out
     if (this.includeWCT) {
       this.fs.copy(
         this.sourceRoot() + '/test/*',
