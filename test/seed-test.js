@@ -70,8 +70,8 @@ describe('yo polymer:seed', function() {
         .on('end', done);
     });
 
-    it('does not include WCT', function() {
-      assert.noFileContent('bower.json', /web-component-tester/gm);
+    it('does include WCT', function() {
+      assert.fileContent('bower.json', /web-component-tester/gm);
     });
 
   });
