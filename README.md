@@ -13,34 +13,36 @@
 
 ## Features
 
-* A TPA Polymer element [tpa-component](https://github.com/ING-Group/tpa-component) based off the goodness of Polymer's [seed-element](https://github.com/polymerelements/seed-element)
+* A TPA Polymer element [tpa-seed](https://github.com/ING-Group/tpa-seed) based off the goodness of Polymer's [seed-element](https://github.com/polymerelements/seed-element)
 
 ## Issues
 
-This generator clones [tpa-component](https://github.com/ING-Group/tpa-component). If you're having issues with the template files generated for those projects, please raise them on those repos as they are the canonical source.
+This generator clones [tpa-seed](https://github.com/ING-Group/tpa-seed). If you're having issues with the template files generated for those projects, please raise them on those repos as they are the canonical source.
 
 ## Installation
 
 ### Install the generator
+
 `npm install -g generator-tpa`
 
 ## Generators
 
 Available generators:
 
-- [tpa:component](#tpa)
+- [tpa:seed](#tpa)
 
 **Note: Generators are to be run from the root of your app**
 
 ### TPA
-Generates a reusable polymer element based on the [tpa-component workflow](https://github.com/ING-Group/tpa-component).
+
+Generates a reusable polymer element based on the [tpa-seed workflow](https://github.com/ING-Group/tpa-seed).
 
 To preview your new element you'll want to use the [polyserve](https://github.com/PolymerLabs/polyserve) tool that's executed via [gulp](http://gulpjs.com/)
 
 Example:
 ```bash
 mkdir -p my-foo && cd $_
-yo tpa:component tpa-account-balance
+yo tpa:seed tpa-account-balance
 gulp
 ```
 

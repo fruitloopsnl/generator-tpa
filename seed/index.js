@@ -25,7 +25,7 @@ module.exports = yeoman.Base.extend({
       defaults: false
     });
 
-    this.sourceRoot(path.join(path.dirname(this.resolved), 'templates/seed-element'));
+    this.sourceRoot(path.join(path.dirname(this.resolved), 'templates/tpa-seed'));
   },
   validate: function () {
     this.elementName = this['element-name'];
@@ -45,25 +45,34 @@ module.exports = yeoman.Base.extend({
     var done = this.async();
 
     // Have Yeoman greet the user.
-    this.log(yosay('Out of the box I include Polymer\'s seed-element.'));
+    this.log(yosay('Out of the box I include Polymer\'s tpa-seed.'));
 
     var prompts = [{
-        name: 'ghUser',
-        message: 'What is your GitHub username?'
-      }, {
-        name: 'includeWCT',
-        message: 'Would you like to include web-component-tester?',
-        type: 'confirm'
+      name: 'ghUser',
+      message: 'What is your GitHub username?'
+    },
+      {
+        name: 'description',
+        message: 'Provide the description for your component:'
+      },
+      {
+        name: 'version',
+        message: 'What is the version of your component?',
+        default: '0.0.1'
       }
     ];
 
     this.prompt(prompts, function (props) {
       this.ghUser = props.ghUser;
-      this.includeWCT = props.includeWCT;
+      this.description = props.description;
+      this.version = props.version;
+      this.includeWCT = true;
 
       // Save user's GitHub name for when they want to use gh subgenerator
       this.config.set({
-        ghUser: this.ghUser
+        ghUser: this.ghUser,
+        description: this.description,
+        version: this.version
       });
       this.config.save();
 
@@ -73,11 +82,11 @@ module.exports = yeoman.Base.extend({
   },
   seed: function () {
 
-    // Process function to replace 'seed-element' in template files
+    // Process function to replace 'tpa-seed' in template files
     // with actual element name
     var renameElement = function (file) {
       file = file.toString();
-      return file.replace(/seed-element/g, this.elementName);
+      return file.replace(/tpa-seed/g, this.elementName);
     }.bind(this);
 
     this.fs.copy([
@@ -88,18 +97,38 @@ module.exports = yeoman.Base.extend({
         process: renameElement,
         globOptions: {
           ignore: [
-            '**/{bower.json,seed-element.html,.npmignore}',
+            '**/{bower.json,tpa-seed.html,tpa-seed-i18n.html,.npmignore}',
             '**/{test,.git}/**'
           ]
         }
       });
 
     this.fs.copy(
-      this.templatePath('seed-element.html'),
+      this.templatePath('tpa-seed.html'),
       this.destinationPath(this.elementName + '.html'),
+      { process: function (file) {
+        file = file.toString();
+        file = file.replace(/tpa-seed/g, this.elementName);
+        file = file.replace(/An element providing a solution to no problem in particular/g, this.description);
+        return file;
+      }.bind(this) });
+
+    this.fs.copy(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      { process: function (file) {
+        var packageFile = file.toString();
+        packageFile = packageFile.replace(/tpa-seed/g, this.elementName);
+        packageFile = packageFile.replace(/An element providing a starting point for your own reusable TPA elements\./g, this.description);
+        packageFile = packageFile.replace(/[\"\']version[\"\']\: [\"\']0\.0\.0[\"\']/g, '"version": "' + this.version + '"');
+        return packageFile;
+      }.bind(this) });
+
+    this.fs.copy(
+      this.templatePath('tpa-seed-i18n.html'),
+      this.destinationPath(this.elementName + '-i18n.html'),
       { process: renameElement });
 
-    // Remove WCT if the user opted out
     this.fs.copy(
       this.templatePath('bower.json'),
       this.destinationPath('bower.json'),
@@ -107,15 +136,18 @@ module.exports = yeoman.Base.extend({
         var manifest =  JSON.parse(file.toString());
         manifest.name = this.elementName;
         manifest.main = this.elementName + '.html';
+        manifest.version = this.version;
+        manifest.description = this.description;
         manifest.license.replace(/polymer/g, this.ghUser);
         manifest.homepage.replace(/<USERNAME>/g, this.ghUser);
-        manifest.homepage.replace(/seed-element/g, this.elementName);
+        manifest.homepage.replace(/tpa-seed/g, this.elementName);
         if (!this.includeWCT) {
           delete manifest.devDependencies['web-component-tester'];
         }
         return JSON.stringify(manifest, null, 2);
       }.bind(this) });
 
+    // Remove WCT if the user opted out
     if (this.includeWCT) {
       this.fs.copy(
         this.sourceRoot() + '/test/*',

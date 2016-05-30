@@ -14,6 +14,8 @@ describe('yo polymer:seed', function() {
         .withArguments(['seed-el'])
         .withPrompts({
           ghUser: 'test-user',
+          description: 'test description',
+          version: '0.0.1',
           elementName: 'seed-el',
           includeWCT: true
         })
@@ -27,6 +29,7 @@ describe('yo polymer:seed', function() {
         'index.html',
         'README.md',
         'seed-el.html',
+        'seed-el-i18n.html',
         'demo/index.html',
         'test/index.html',
         'test/basic-test.html'
@@ -48,6 +51,23 @@ describe('yo polymer:seed', function() {
     it('creates the correct bower.json content', function () {
       assert.fileContent('bower.json', /"name": "seed-el"/);
       assert.fileContent('bower.json', /"main": "seed-el.html"/);
+      assert.fileContent('bower.json', /"description": "test description"/);
+      assert.fileContent('bower.json', /"version": "0.0.1"/);
+    });
+
+    it('creates the correct package.json content', function () {
+      assert.fileContent('package.json', /"name": "seed-el"/);
+      assert.fileContent('package.json', /"version": "0.0.1"/);
+      assert.fileContent('package.json', /"description": "test description"/);
+      assert.fileContent('package.json', /"main": "seed-el.html"/);
+    });
+
+    it('sets the correct description in the component', function () {
+      assert.fileContent('seed-el.html', /test description/);
+    });
+
+    it('sets the correct link to the i18n file in the component', function () {
+      assert.fileContent('seed-el.html', /seed-el-i18n.html/);
     });
 
     it('includes WCT', function() {
@@ -70,8 +90,8 @@ describe('yo polymer:seed', function() {
         .on('end', done);
     });
 
-    it('does not include WCT', function() {
-      assert.noFileContent('bower.json', /web-component-tester/gm);
+    it('does include WCT', function() {
+      assert.fileContent('bower.json', /web-component-tester/gm);
     });
 
   });

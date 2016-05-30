@@ -1,9 +1,3 @@
-[submodule "app/templates/polymer-starter-kit"]
-	path = app/templates/polymer-starter-kit
-	url = https://github.com/PolymerElements/polymer-starter-kit.git
-[submodule "seed/templates/seed-element"]
-	path = seed/templates/seed-element
-	url = https://github.com/PolymerElements/seed-element.git
-[submodule "component/templates/tpa-component"]
-	path = component/templates/tpa-component
-	url = https://github.com/ING-Group/tpa-component.git
+[submodule "seed/templates/tpa-seed"]
+	path = seed/templates/tpa-seed
+	url = https://github.com/ING-Group/tpa-seed.git
