@@ -51,14 +51,14 @@ describe('yo polymer:seed', function() {
     it('creates the correct bower.json content', function () {
       assert.fileContent('bower.json', /"name": "seed-el"/);
       assert.fileContent('bower.json', /"main": "seed-el.html"/);
-      assert.fileContent('bower.json', /"description": "test desc seed"/);
+      assert.fileContent('bower.json', /"description": "test description"/);
       assert.fileContent('bower.json', /"version": "0.0.1"/);
     });
 
     it('creates the correct package.json content', function () {
       assert.fileContent('package.json', /"name": "seed-el"/);
       assert.fileContent('package.json', /"version": "0.0.1"/);
-      assert.fileContent('package.json', /"description": "test desc seed"/);
+      assert.fileContent('package.json', /"description": "test description"/);
       assert.fileContent('package.json', /"main": "seed-el.html"/);
     });
 
