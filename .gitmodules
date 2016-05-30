@@ -1,0 +1,3 @@
+[submodule "seed/templates/tpa-seed"]
+	path = seed/templates/tpa-seed
+	url = https://github.com/ING-Group/tpa-seed.git
