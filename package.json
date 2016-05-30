@@ -40,7 +40,7 @@
   },
   "licenses": "BSD",
   "files": [ 
-    "component",
+    "seed",
     "script-base.js",
     "util.js"
   ]
