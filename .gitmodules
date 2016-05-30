@@ -4,6 +4,3 @@
 [submodule "seed/templates/seed-element"]
 	path = seed/templates/seed-element
 	url = https://github.com/PolymerElements/seed-element.git
-[submodule "component/templates/tpa-component"]
-	path = component/templates/tpa-component
-	url = https://github.com/ING-Group/tpa-component.git

@@ -25,7 +25,7 @@ module.exports = yeoman.Base.extend({
       defaults: false
     });
 
-    this.sourceRoot(path.join(path.dirname(this.resolved), 'templates/tpa-component'));
+    this.sourceRoot(path.join(path.dirname(this.resolved), 'templates/tpa-seed'));
   },
   validate: function () {
     this.elementName = this['element-name'];
@@ -45,7 +45,7 @@ module.exports = yeoman.Base.extend({
     var done = this.async();
 
     // Have Yeoman greet the user.
-    this.log(yosay('Out of the box I include Polymer\'s tpa-component.'));
+    this.log(yosay('Out of the box I include Polymer\'s tpa-seed.'));
 
     var prompts = [{
         name: 'ghUser',
@@ -67,13 +67,13 @@ module.exports = yeoman.Base.extend({
     }.bind(this));
 
   },
-  component: function () {
+  seed: function () {
 
-    // Process function to replace 'tpa-component' in template files
+    // Process function to replace 'tpa-seed' in template files
     // with actual element name
     var renameElement = function (file) {
       file = file.toString();
-      return file.replace(/tpa-component/g, this.elementName);
+      return file.replace(/tpa-seed/g, this.elementName);
     }.bind(this);
 
     this.fs.copy([
@@ -84,19 +84,19 @@ module.exports = yeoman.Base.extend({
         process: renameElement,
         globOptions: {
           ignore: [
-            '**/{bower.json,tpa-component.html,tpa-component-i18n.html,.npmignore}',
+            '**/{bower.json,tpa-seed.html,tpa-seed-i18n.html,.npmignore}',
             '**/{test,.git}/**'
           ]
         }
       });
 
     this.fs.copy(
-      this.templatePath('tpa-component.html'),
+      this.templatePath('tpa-seed.html'),
       this.destinationPath(this.elementName + '.html'),
       { process: renameElement });
       
     this.fs.copy(
-      this.templatePath('tpa-component-i18n.html'),
+      this.templatePath('tpa-seed-i18n.html'),
       this.destinationPath(this.elementName + '-i18n.html'),
       { process: renameElement });      
 
@@ -110,7 +110,7 @@ module.exports = yeoman.Base.extend({
         manifest.main = this.elementName + '.html';
         manifest.license.replace(/polymer/g, this.ghUser);
         manifest.homepage.replace(/<USERNAME>/g, this.ghUser);
-        manifest.homepage.replace(/tpa-component/g, this.elementName);
+        manifest.homepage.replace(/tpa-seed/g, this.elementName);
         if (!this.includeWCT) {
           delete manifest.devDependencies['web-component-tester'];
         }
