@@ -22,6 +22,7 @@ This generator clones [tpa-seed](https://github.com/ING-Group/tpa-seed). If you'
 ## Installation
 
 ### Install the generator
+
 `npm install -g generator-tpa`
 
 ## Generators
@@ -33,6 +34,7 @@ Available generators:
 **Note: Generators are to be run from the root of your app**
 
 ### TPA
+
 Generates a reusable polymer element based on the [tpa-seed workflow](https://github.com/ING-Group/tpa-seed).
 
 To preview your new element you'll want to use the [polyserve](https://github.com/PolymerLabs/polyserve) tool that's executed via [gulp](http://gulpjs.com/)
