@@ -1,6 +1,6 @@
 {
   "name": "generator-tpa",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Scaffold out a TPA project",
   "keywords": [
     "yeoman-generator",
@@ -39,7 +39,7 @@
     "node": ">=0.10.0"
   },
   "licenses": "BSD",
-  "files": [ 
+  "files": [
     "seed",
     "script-base.js",
     "util.js"
