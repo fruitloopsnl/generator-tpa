@@ -13,7 +13,6 @@
 
 ## Features
 
-* A TPA Polymer element [tpa-seed](https://github.com/ING-Group/tpa-seed) that was forked from Polymer's [seed-element](https://github.com/polymerelements/seed-element)
 * Seed element contains examples such as unit testing, i18n, API mocking for a developer to contribute new functionality into the [TPA Bootstrap](https://github.com/ING-Group/tpa-bootstrap) application 
 
 ## Issues
@@ -26,25 +25,34 @@ If you're having issues with the template files generated for this project, plea
 
 ### Install the generator
 
-`npm install -g generator-tpa`
+    npm install -g generator-tpa
+
+To validate the install, type
+
+    yo --help
+    
+This will list the available generators, you should see `tpa seed` listed
 
 ## Generators
 
-[tpa:seed](#tpa) is the only available generator.
+[tpa:seed](#tpa-seed) is the only available generator.
 
-More can be [contributed](#Adding a new generator) to over time
+More can be [contributed](#contribute) to over time
 
 **Note: Generator is to be run from the root of your app**
 
-### TPA
+### tpa-seed
 
-Generates a reusable polymer element based on the tpa-seed template.
+Generates a reusable polymer element based off a standard UI template that includes examples of unit testing, API calls, i18n and TPA styling. 
 
-To preview your new element you'll want to use the [polyserve](https://github.com/PolymerLabs/polyserve) and [Drakov](https://github.com/Aconex/drakov) tools that's executed via [gulp](http://gulpjs.com/)
+These components are typically consumed in the [tpa bootstrap](https://github.com/ING-Group/tpa-bootstrap) and registered with the [tpa catalog](https://github.com/ING-Group/tpa-catalog) through the the relevant [tpa elements](https://github.com/ING-Group/tpa-elements) repository
 
-For further explanation of these tools, see the [tpa-seed README](https://github.com/ING-Group/tpa-seed)
+To preview the element after generation, it will use the following tools :
+* [npm](https://www.npmjs.com/) and [bower](http://bower.io/) for dependency management 
+* [polyserve](https://github.com/PolymerLabs/polyserve) and [drakov](https://github.com/Aconex/drakov) for local hosting
+* [gulp](http://gulpjs.com/) as the task runner
 
-Example:
+For example:
 ```bash
 mkdir -p tpa-new-element && cd $_
 yo tpa:seed tpa-new-element
@@ -52,11 +60,17 @@ npm install && bower install
 gulp serve
 ```
 
+For further explanation of the development tools, see the [tpa-seed](https://github.com/ING-Group/tpa-seed) README
+
 ## Contribute
 
 See the [contributing docs](https://github.com/yeoman/yeoman/blob/master/contributing.md) 
 
-When submitting an issue, please follow the [guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-submission). Especially important is to make sure Yeoman is up-to-date, and providing the command or commands that cause the issue.
+When submitting an issue, please follow the [guidelines](https://github.com/yeoman/yeoman/blob/master/contributing.md#issue-submission). 
+
+Especially important is to make sure Yeoman is up-to-date, and providing the command or commands that cause the issue.
+
+Run `yo doctor` to validate the state of your installation.
 
 ### Install the generator from a local folder
 First clone this project to a local folder, and from that folder execute the following command:
